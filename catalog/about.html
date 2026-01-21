@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Eagle Delivery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a12;
+      --card-bg: rgba(20, 20, 40, 0.65);
+      --purple: #7c3aed;
+      --purple-light: #a855f7;
+      --text: #e0e0ff;
+      --text-muted: #a0a0cc;
+      --border: rgba(124, 58, 237, 0.25);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0a0a12 0%, #12051f 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    header {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,18,0.75);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo svg { width: 150px; height: auto; }
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #c084fc, #a855f7, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      margin-left: 10px;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 24px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .btn {
+      background: linear-gradient(90deg, var(--purple), var(--purple-light));
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .hero { padding: 80px 0 60px; text-align: center; }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(90deg, #ffffff, var(--purple-light), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+    .content-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      margin: 30px 0;
+    }
+    .content-card h2 {
+      color: var(--purple-light);
+      margin-bottom: 16px;
+      font-size: 1.8rem;
+    }
+    .content-card p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .content-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 16px;
+    }
+    .content-card li {
+      color: var(--text-muted);
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+    .content-card li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--purple-light);
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 0 30px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <svg width="150" height="80" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="eagleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c084fc" />
+                <stop offset="50%" stop-color="#a855f7" />
+                <stop offset="100%" stop-color="#7c3aed" />
+              </linearGradient>
+            </defs>
+            <polygon points="80,160 150,120 120,200" fill="url(#eagleGrad)" opacity="0.9"/>
+            <polygon points="120,180 200,130 160,240" fill="url(#eagleGrad)" opacity="0.8"/>
+            <path d="M320 150 Q280 120 240 150 Q260 80 320 100 L350 150 Q330 180 280 170 Z" fill="url(#eagleGrad)"/>
+            <path d="M240 150 L150 170 L240 190 Z" fill="#5b21b6"/>
+            <circle cx="290" cy="140" r="12" fill="#1f1f3f" stroke="#a855f7" stroke-width="2"/>
+            <circle cx="292" cy="138" r="5" fill="white"/>
+            <rect x="280" y="200" width="220" height="90" fill="url(#eagleGrad)" rx="8"/>
+            <rect x="490" y="170" width="70" height="120" fill="url(#eagleGrad)" rx="8"/>
+            <rect x="505" y="185" width="40" height="35" fill="#4a9ff5" stroke="#2563eb" stroke-width="2"/>
+            <rect x="555" y="210" width="12" height="80" fill="#5b21b6"/>
+            <circle cx="340" cy="305" r="35" fill="#3d3d5c" stroke="#7c3aed" stroke-width="3"/>
+            <circle cx="340" cy="305" r="22" fill="#1f1f2e"/>
+            <circle cx="340" cy="305" r="10" fill="#5b21b6"/>
+            <circle cx="480" cy="305" r="35" fill="#3d3d5c" stroke="#7c3aed" stroke-width="3"/>
+            <circle cx="480" cy="305" r="22" fill="#1f1f2e"/>
+            <circle cx="480" cy="305" r="10" fill="#5b21b6"/>
+            <polygon points="420,140 490,100 460,180" fill="url(#eagleGrad)" opacity="0.9"/>
+            <polygon points="480,160 560,110 520,200" fill="url(#eagleGrad)" opacity="0.8"/>
+            <polygon points="200,200 120,150 150,280 200,250" fill="url(#eagleGrad)" opacity="0.7"/>
+          </svg>
+          <span class="logo-text">Eagle Delivery</span>
+        </div>
+        <div class="nav-links">
+          <a href="../online_viewer_net (5).html">Main</a>
+          <a href="../catalog.html">Catalog</a>
+        </div>
+        <button class="btn" onclick="window.location.href='../online_viewer_net (5).html'">Back</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>About Eagle Delivery</h1>
+      <p>Leading provider of virtual SMS verification services</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="content-card">
+      <h2>Our Story</h2>
+      <p>Eagle Delivery was founded with a mission to make online verification fast, secure, and accessible to everyone. With years of expertise in telecommunications and digital security, we've built a platform trusted by thousands worldwide.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Our Mission</h2>
+      <p>To provide reliable, fast, and affordable virtual phone numbers for SMS verification. We believe everyone deserves privacy and security when registering for online services.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li>Instant number delivery - Get verified within seconds</li>
+        <li>Global coverage - Numbers from 50+ countries</li>
+        <li>Premium security - Your privacy is our priority</li>
+        <li>24/7 support - Always here to help you</li>
+        <li>Competitive pricing - Best rates in the industry</li>
+        <li>Reliable service - 99.9% uptime guarantee</li>
+        <li>API integration - Seamless automation available</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h2>Get In Touch</h2>
+      <p>Have questions? Our support team is ready to help!</p>
+      <p>Email: <strong>support@eagledelivery.com</strong></p>
+      <p>Phone: <strong>+1 (800) DELIVERY</strong></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Eagle Delivery. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-section">
+                <svg class="logo" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="truckGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#b4a3d0;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#7d6b9f;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="100,280 100,400 400,400 420,250 100,250" fill="url(#truckGradient)" stroke="#5a4d6f" stroke-width="3"/>
+                    <rect x="420" y="280" width="80" height="120" fill="url(#truckGradient)" stroke="#5a4d6f" stroke-width="3" rx="5"/>
+                    <rect x="430" y="290" width="35" height="40" fill="#87ceeb" stroke="#333" stroke-width="2"/>
+                    <rect x="495" y="310" width="15" height="70" fill="#4a3d5f" stroke="#333" stroke-width="2"/>
+                    <circle cx="180" cy="410" r="30" fill="#333" stroke="#5a4d6f" stroke-width="2"/>
+                    <circle cx="180" cy="410" r="18" fill="#666"/>
+                    <circle cx="180" cy="410" r="8" fill="#999"/>
+                    <circle cx="360" cy="410" r="30" fill="#333" stroke="#5a4d6f" stroke-width="2"/>
+                    <circle cx="360" cy="410" r="18" fill="#666"/>
+                    <circle cx="360" cy="410" r="8" fill="#999"/>
+                    <polygon points="150,200 170,240 140,240" fill="#d4a3e8" opacity="0.8"/>
+                    <polygon points="300,180 330,230 290,230" fill="#d4a3e8" opacity="0.7"/>
+                    <polygon points="480,220 510,270 450,270" fill="#d4a3e8" opacity="0.8"/>
+                    <polygon points="400,150 430,200 370,200" fill="#d4a3e8" opacity="0.7"/>
+                    <text x="250" y="350" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#fff" stroke="#5a4d6f" stroke-width="2">EAGLE</text>
+                </svg>
+                <h1>EAGLE DELIVERY</h1>
+                <p class="tagline">О нашей компании</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="items.html">Каталог</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="about.html" class="active">О нас</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>О компании Lecho</h2>
+                <p>История успеха и развития в логистике</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="features">
+                    <div class="feature-card fade-in">
+                        <h3>📅 Опыт</h3>
+                        <p>Более 10 лет на рынке логистики и доставки. Миллионы успешных доставок.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <h3>🌟 Лидеры рынка</h3>
+                        <p>Мы являемся лидерами в инновационных решениях логистики.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <h3>💼 Партнёры</h3>
+                        <p>Работаем с крупнейшими компаниями России и мира.</p>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 40px; border-radius: 10px; margin: 40px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                    <h2 style="color: var(--primary-color); margin-bottom: 20px;">Наша миссия</h2>
+                    <p style="font-size: 1.1em; color: var(--text-light); line-height: 1.8;">
+                        Eagle Delivery — это современная логистическая компания, которая привносит скорость, надёжность и инновации в мир доставки и логистики. 
+                        Мы верим, что логистика должна быть простой, доступной и безопасной для каждого клиента, независимо от размера груза или расстояния доставки.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 40px; border-radius: 10px; margin: 40px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                    <h2 style="color: var(--primary-color); margin-bottom: 20px;">Наши ценности</h2>
+                    <ul style="list-style: none; font-size: 1.1em; color: var(--text-dark);">
+                        <li style="padding: 10px 0;"><strong style="color: var(--primary-color);">✓ Надёжность</strong> — мы всегда выполняем свои обещания</li>
+                        <li style="padding: 10px 0;"><strong style="color: var(--primary-color);">✓ Скорость</strong> — быстрая обработка и доставка</li>
+                        <li style="padding: 10px 0;"><strong style="color: var(--primary-color);">✓ Инновация</strong> — используем передовые технологии</li>
+                        <li style="padding: 10px 0;"><strong style="color: var(--primary-color);">✓ Качество</strong> — высокие стандарты во всём</li>
+                        <li style="padding: 10px 0;"><strong style="color: var(--primary-color);">✓ Клиентоориентированность</strong> — вы — наш приоритет</li>
+                    </ul>
+                </div>
+
+                <div style="background: var(--primary-light); color: white; padding: 40px; border-radius: 10px; margin: 40px 0; text-align: center;">
+                    <h2 style="margin-bottom: 20px;">Свяжитесь с нами</h2>
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">Остались вопросы? Мы готовы помочь!</p>
+                    <p style="margin: 10px 0;"><strong>Телефон:</strong> +7 (800) 123-45-67</p>
+                    <p style="margin: 10px 0;"><strong>Email:</strong> info@lecho.ru</p>
+                    <p style="margin: 10px 0;"><strong>Адрес:</strong> г. Москва, ул. Логистики, 1</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Eagle Delivery. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>

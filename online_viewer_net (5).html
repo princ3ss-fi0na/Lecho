@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eagle Delivery — Virtual Numbers for Fast SMS Verification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --bg: #0a0a12;
+      --card-bg: rgba(20, 20, 40, 0.65);
+      --purple: #7c3aed;
+      --purple-light: #a855f7;
+      --purple-dark: #5b21b6;
+      --text: #e0e0ff;
+      --text-muted: #a0a0cc;
+      --border: rgba(124, 58, 237, 0.25);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0a0a12 0%, #12051f 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    header {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,18,0.75);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo svg {
+      width: 150px;
+      height: auto;
+    }
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #c084fc, #a855f7, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      margin-left: 10px;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 24px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--purple-light); }
+    .btn {
+      background: linear-gradient(90deg, var(--purple), var(--purple-light));
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(124,58,237,0.5);
+    }
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(90deg, #ffffff, var(--purple-light), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 60px 0;
+    }
+    .step-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .step-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(124,58,237,0.12), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .step-card:hover::before { opacity: 1; }
+    .step-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 32px rgba(124,58,237,0.25);
+    }
+    .step-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: var(--purple);
+      opacity: 0.15;
+      position: absolute;
+      top: 8px;
+      right: 16px;
+      pointer-events: none;
+    }
+    .step-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .service-item {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 12px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      min-height: 100px;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(124,58,237,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .service-item:hover {
+      background: rgba(124,58,237,0.25);
+      border-color: var(--purple-light);
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(124,58,237,0.3), 0 0 20px rgba(124,58,237,0.15);
+    }
+    .service-item:hover::before { opacity: 1; }
+    .service-item:active {
+      transform: translateY(-4px) scale(0.98);
+    }
+    .service-item i { 
+      color: var(--purple-light);
+      font-size: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .service-item:hover i {
+      font-size: 2.3rem;
+      color: var(--text);
+      text-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+    }
+    .rank-filter {
+      display: flex;
+      gap: 10px;
+      margin: 24px 0 20px;
+      flex-wrap: wrap;
+    }
+    .rank-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .rank-btn.active, .rank-btn:hover {
+      background: var(--purple);
+      color: white;
+      border-color: var(--purple);
+    }
+    .countries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 32px 0 80px;
+    }
+    .country-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.4s;
+      cursor: pointer;
+    }
+    .country-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 28px rgba(124,58,237,0.3);
+      border-color: var(--purple-light);
+    }
+    .flag {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+    }
+    .flag-img {
+      height: 60px;
+      width: 90px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+    .country-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .country-info {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+    .buy-btn {
+      background: linear-gradient(90deg, var(--purple-dark), var(--purple));
+      color: white;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .buy-btn:hover {
+      background: linear-gradient(90deg, var(--purple), var(--purple-light));
+      transform: scale(1.05);
+    }
+    /* Auth Screens */
+    .auth-section {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-form {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      width: 400px;
+      max-width: 90%;
+      position: relative;
+      padding-top: 50px;
+    }
+    .auth-form h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: white;
+    }
+    .auth-form input {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(30,30,60,0.6);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .auth-form button {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .auth-switch {
+      text-align: center;
+      margin-top: 16px;
+      color: var(--text-muted);
+    }
+    .auth-switch a {
+      color: var(--purple-light);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    /* Admin Panel */
+    #admin-panel, #clients-section, #partners-section, #api-section, #mail-section {
+      display: none;
+      padding: 60px 0;
+    }
+    .admin-card, .section-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    .admin-card h2, .section-card h2 {
+      margin-bottom: 24px;
+      color: white;
+    }
+    .api-input {
+      margin-bottom: 20px;
+    }
+    .api-input label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .api-input input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(30,30,60,0.6);
+      color: var(--text);
+    }
+    .save-btn {
+      margin-top: 24px;
+    }
+    /* Purchase Modal */
+    #purchase-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .purchase-form {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      width: 500px;
+      max-width: 90%;
+      position: relative;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .purchase-form h2 {
+      margin-bottom: 16px;
+      color: white;
+    }
+    .purchase-form p {
+      margin-bottom: 24px;
+      color: var(--text-muted);
+    }
+    .purchase-form .btn {
+      width: 100%;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 0 30px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    /* Visibility Classes */
+    .show { display: flex !important; }
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: color 0.3s;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 1;
+    }
+    .close-btn:hover {
+      color: var(--purple-light);
+    }
+    @media (max-width: 768px) {
+      .service-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+      .countries-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+    .hide { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="logo/e8152e27-6f5f-4946-a23e-d8752196bc41.jpg" alt="Eagle Delivery" style="height: 80px; margin-right: 12px;">
+          <span class="logo-text">Eagle Delivery</span>
+        </div>
+        <div class="nav-links">
+          <a href="#" onclick="showMain()">Home</a>
+          <a href="#" onclick="showSection('clients')">For Clients</a>
+          <a href="#" onclick="showSection('partners')">Partners</a>
+          <a href="#" onclick="showSection('api')">API</a>
+          <a href="#" onclick="showSection('mail')">Mail</a>
+          <a href="#" onclick="showSection('admin')">Admin</a>
+        </div>
+        <button class="btn" onclick="showLogin()">Sign In</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Virtual Numbers for Fast & Secure SMS</h1>
+      <p>
+        Receive verification codes instantly. Register and test services without risking your personal number.<br>
+        Modern. Reliable. Innovative.
+      </p>
+      <button class="btn" style="font-size:1.1rem; padding:14px 40px;">Get Started Now</button>
+    </div>
+  </section>
+
+  <section class="container" id="main-content">
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Select Service</h3>
+        <p>Choose the platform you need a number for:</p>
+        <div class="service-grid">
+          <div class="service-item" onclick="showPurchase('Telegram')"><i class="fa-brands fa-telegram"></i>Telegram</div>
+          <div class="service-item" onclick="showPurchase('WhatsApp')"><i class="fa-brands fa-whatsapp"></i>WhatsApp</div>
+          <div class="service-item" onclick="showPurchase('Facebook')"><i class="fa-brands fa-facebook"></i>Facebook</div>
+          <div class="service-item" onclick="showPurchase('Instagram')"><i class="fa-brands fa-instagram"></i>Instagram</div>
+          <div class="service-item" onclick="showPurchase('Twitter / X')"><i class="fa-brands fa-twitter"></i>Twitter / X</div>
+          <div class="service-item" onclick="showPurchase('Discord')"><i class="fa-brands fa-discord"></i>Discord</div>
+          <div class="service-item" onclick="showPurchase('TikTok')"><i class="fa-brands fa-tiktok"></i>TikTok</div>
+          <div class="service-item" onclick="showPurchase('Google')"><i class="fa-brands fa-google"></i>Google</div>
+          <div class="service-item" onclick="showPurchase('VKontakte')"><i class="fa-solid fa-v"></i>VKontakte</div>
+          <div class="service-item" onclick="showPurchase('Amazon')"><i class="fa-brands fa-amazon"></i>Amazon</div>
+          <div class="service-item" onclick="showPurchase('eBay')"><i class="fa-brands fa-ebay"></i>eBay</div>
+          <div class="service-item" onclick="showPurchase('PayPal')"><i class="fa-brands fa-paypal"></i>PayPal</div>
+        </div>
+        <p style="margin-top:16px; font-size:0.9rem; color:var(--text-muted);">
+          Didn't find your service? <a href="#" style="color:var(--purple-light);">Contact support</a>
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Select Quality Rank</h3>
+        <p>Choose the reliability level that suits your needs:</p>
+        <div class="rank-filter">
+          <button class="rank-btn active">All</button>
+          <button class="rank-btn">Gold</button>
+          <button class="rank-btn">Silver</button>
+          <button class="rank-btn">Bronze</button>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Select Country (EU Focus)</h3>
+        <p>Choose from trusted EU countries with high success rates:</p>
+      </div>
+    </div>
+
+    <div class="countries-grid">
+      <div class="country-card" onclick="showPurchase('Germany')">
+        <img src="svg/de.svg" class="flag-img" alt="Germany">
+        <div class="country-name">Germany</div>
+        <div class="country-info">~12 400 pcs • from €0.45</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+      <div class="country-card" onclick="showPurchase('France')">
+        <img src="svg/fr.svg" class="flag-img" alt="France">
+        <div class="country-name">France</div>
+        <div class="country-info">~8 900 pcs • from €0.42</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+      <div class="country-card" onclick="showPurchase('Italy')">
+        <img src="svg/it.svg" class="flag-img" alt="Italy">
+        <div class="country-name">Italy</div>
+        <div class="country-info">~15 200 pcs • from €0.38</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+      <div class="country-card" onclick="showPurchase('Spain')">
+        <img src="svg/es.svg" class="flag-img" alt="Spain">
+        <div class="country-name">Spain</div>
+        <div class="country-info">~9 800 pcs • from €0.40</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+      <div class="country-card" onclick="showPurchase('Poland')">
+        <img src="svg/pl.svg" class="flag-img" alt="Poland">
+        <div class="country-name">Poland</div>
+        <div class="country-info">~22 000 pcs • from €0.35</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+      <div class="country-card" onclick="showPurchase('Netherlands')">
+        <img src="svg/nl.svg" class="flag-img" alt="Netherlands">
+        <div class="country-name">Netherlands</div>
+        <div class="country-info">~7 100 pcs • from €0.48</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+      <div class="country-card" onclick="showPurchase('Czech Republic')">
+        <img src="svg/cz.svg" class="flag-img" alt="Czech Republic">
+        <div class="country-name">Czech Republic</div>
+        <div class="country-info">~6 900 pcs • from €0.40</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+      <div class="country-card" onclick="showPurchase('Romania')">
+        <img src="svg/ro.svg" class="flag-img" alt="Romania">
+        <div class="country-name">Romania</div>
+        <div class="country-info">~11 000 pcs • from €0.36</div>
+        <button class="buy-btn">Buy</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login Modal -->
+  <section id="login-section" class="auth-section" onclick="if(event.target === this) hideAuth();">
+    <div class="auth-form">
+      <button class="close-btn" onclick="hideAuth();">✕</button>
+      <h2>Sign In</h2>
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button class="btn" onclick="alert('Logged in!'); hideAuth();">Sign In</button>
+      <div class="auth-switch">Don't have an account? <a onclick="switchToRegister()">Register</a></div>
+    </div>
+  </section>
+
+  <!-- Register Modal -->
+  <section id="register-section" class="auth-section" onclick="if(event.target === this) hideAuth();">
+    <div class="auth-form">
+      <button class="close-btn" onclick="hideAuth();">✕</button>
+      <h2>Register</h2>
+      <input type="text" placeholder="Username">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <input type="password" placeholder="Confirm Password">
+      <button class="btn" onclick="alert('Registered!'); hideAuth();">Register</button>
+      <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign In</a></div>
+    </div>
+  </section>
+
+  <!-- Purchase Modal -->
+  <section id="purchase-modal" onclick="if(event.target === this) hidePurchase();">
+    <div class="purchase-form">
+      <button class="close-btn" onclick="hidePurchase();">✕</button>
+      <h2>Purchase Number for <span id="purchase-target"></span></h2>
+      <p>Select options and proceed to buy a virtual number.</p>
+      <select style="width:100%; padding:12px; margin-bottom:16px; border:1px solid var(--border); border-radius:8px; background:rgba(30,30,60,0.6); color:var(--text);">
+        <option>Gold Rank - €0.50</option>
+        <option>Silver Rank - €0.40</option>
+        <option>Bronze Rank - €0.30</option>
+      </select>
+      <button class="btn" onclick="alert('Number purchased! Your number: +49-123-4567890'); hidePurchase();">Buy Now</button>
+      <button onclick="hidePurchase()" style="margin-top:16px; background:none; border:none; color:var(--text-muted); cursor:pointer;">Cancel</button>
+    </div>
+  </section>
+
+  <!-- Clients Section -->
+  <section id="clients-section" class="container">
+    <div class="section-card">
+      <h2>For Clients</h2>
+      <p>Welcome to the client dashboard. Here you can manage your purchased numbers, view history, and more.</p>
+      <ul style="list-style-type:disc; padding-left:20px; color:var(--text-muted);">
+        <li>Active Numbers: 5</li>
+        <li>Balance: €10.00</li>
+        <li>Recent Purchases: Telegram (Germany), WhatsApp (France)</li>
+      </ul>
+      <button class="btn" onclick="showMain()" style="margin-top:24px;">Back to Home</button>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section id="partners-section" class="container">
+    <div class="section-card">
+      <h2>For Partners</h2>
+      <p>Join our partner program to resell virtual numbers and earn commissions. Integrate with our API for seamless operations.</p>
+      <p>Benefits:</p>
+      <ul style="list-style-type:disc; padding-left:20px; color:var(--text-muted);">
+        <li>Up to 20% commission</li>
+        <li>API access</li>
+        <li>Dedicated support</li>
+      </ul>
+      <button class="btn" onclick="showMain()" style="margin-top:24px;">Back to Home</button>
+    </div>
+  </section>
+
+  <!-- API Section -->
+  <section id="api-section" class="container">
+    <div class="section-card">
+      <h2>API Documentation</h2>
+      <p>Our API allows you to programmatically purchase and manage virtual numbers.</p>
+      <pre style="background:rgba(30,30,60,0.6); padding:16px; border-radius:8px; overflow:auto; color:var(--text);">
+GET /api/numbers?country=DE&amp;service=Telegram
+
+Response:
+{
+  "number": "+491234567890",
+  "price": 0.45
+}
+      </pre>
+      <p>For full docs, contact support.</p>
+      <button class="btn" onclick="showMain()" style="margin-top:24px;">Back to Home</button>
+    </div>
+  </section>
+
+  <!-- Mail Section -->
+  <section id="mail-section" class="container">
+    <div class="section-card">
+      <h2>Temporary Mail Service</h2>
+      <p>Get disposable email addresses for verification and privacy.</p>
+      <input type="text" placeholder="Generate email" style="width:100%; padding:12px; margin-bottom:16px; border:1px solid var(--border); border-radius:8px; background:rgba(30,30,60,0.6); color:var(--text);">
+      <button class="btn" style="width:100%;">Generate</button>
+      <p style="margin-top:16px; color:var(--text-muted);">Inbox will appear here.</p>
+      <button class="btn" onclick="showMain()" style="margin-top:24px;">Back to Home</button>
+    </div>
+  </section>
+
+  <!-- Admin Panel -->
+  <section id="admin-panel" class="container">
+    <div class="admin-card">
+      <h2>Admin Panel - API Integrations for Reselling</h2>
+      <p>Link API tokens from partner services for seamless reselling of virtual numbers.</p>
+      <div class="api-input">
+        <label for="smsbower-api">SMSBower API Token</label>
+        <input id="smsbower-api" type="text" placeholder="Enter SMSBower API token">
+      </div>
+      <div class="api-input">
+        <label for="herosms-api">HeroSMS API Token</label>
+        <input id="herosms-api" type="text" placeholder="Enter HeroSMS API token">
+      </div>
+      <div class="api-input">
+        <label for="other-api">Other Service API Token</label>
+        <input id="other-api" type="text" placeholder="Enter other service API token">
+      </div>
+      <button class="btn save-btn" onclick="alert('API tokens saved!'); showMain();">Save Changes</button>
+      <button class="btn" onclick="showMain()" style="margin-top:16px; background:none; border:1px solid var(--border); color:var(--text);">Back to Home</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Eagle Delivery. All rights reserved.<br>
+      Fast • Secure • Private virtual numbers for SMS verification.</p>
+    </div>
+  </footer>
+
+  <script>
+    function showLogin() {
+      document.getElementById('login-section').classList.add('show');
+    }
+    function showRegister() {
+      document.getElementById('register-section').classList.add('show');
+    }
+    function hideAuth() {
+      document.querySelectorAll('.auth-section').forEach(el => el.classList.remove('show'));
+    }
+    function switchToRegister() {
+      hideAuth();
+      showRegister();
+    }
+    function switchToLogin() {
+      hideAuth();
+      showLogin();
+    }
+    function showPurchase(target) {
+      document.getElementById('purchase-target').textContent = target;
+      document.getElementById('purchase-modal').style.display = 'flex';
+    }
+    function hidePurchase() {
+      document.getElementById('purchase-modal').style.display = 'none';
+    }
+    function showSection(section) {
+      document.getElementById('main-content').classList.add('hide');
+      document.querySelector('.hero').classList.add('hide');
+      document.querySelectorAll('#clients-section, #partners-section, #api-section, #mail-section, #admin-panel').forEach(el => el.style.display = 'none');
+      document.getElementById(section + '-section').style.display = 'block';
+    }
+    function showMain() {
+      document.querySelectorAll('#clients-section, #partners-section, #api-section, #mail-section, #admin-panel').forEach(el => el.style.display = 'none');
+      document.getElementById('main-content').classList.remove('hide');
+      document.querySelector('.hero').classList.remove('hide');
+    }
+    // Закрытие модалей по Escape
+    document.addEventListener('keydown', function(e) {
+      if(e.key === 'Escape') {
+        hideAuth();
+        hidePurchase();
+      }
+    });
+  </script>
+
+</body>
+</html>

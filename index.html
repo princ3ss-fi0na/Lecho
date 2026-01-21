@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eagle Delivery - Доставка и логистика</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-section">
+                <svg class="logo" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Грузовик с логотипом Lecho -->
+                    <defs>
+                        <linearGradient id="truckGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#b4a3d0;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#7d6b9f;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Кузов грузовика -->
+                    <polygon points="100,280 100,400 400,400 420,250 100,250" fill="url(#truckGradient)" stroke="#5a4d6f" stroke-width="3"/>
+                    
+                    <!-- Кабина -->
+                    <rect x="420" y="280" width="80" height="120" fill="url(#truckGradient)" stroke="#5a4d6f" stroke-width="3" rx="5"/>
+                    
+                    <!-- Окно кабины -->
+                    <rect x="430" y="290" width="35" height="40" fill="#87ceeb" stroke="#333" stroke-width="2"/>
+                    
+                    <!-- Передний бампер -->
+                    <rect x="495" y="310" width="15" height="70" fill="#4a3d5f" stroke="#333" stroke-width="2"/>
+                    
+                    <!-- Колёса -->
+                    <circle cx="180" cy="410" r="30" fill="#333" stroke="#5a4d6f" stroke-width="2"/>
+                    <circle cx="180" cy="410" r="18" fill="#666"/>
+                    <circle cx="180" cy="410" r="8" fill="#999"/>
+                    
+                    <circle cx="360" cy="410" r="30" fill="#333" stroke="#5a4d6f" stroke-width="2"/>
+                    <circle cx="360" cy="410" r="18" fill="#666"/>
+                    <circle cx="360" cy="410" r="8" fill="#999"/>
+                    
+                    <!-- Молния скорости слева -->
+                    <polygon points="150,200 170,240 140,240" fill="#d4a3e8" opacity="0.8"/>
+                    <polygon points="300,180 330,230 290,230" fill="#d4a3e8" opacity="0.7"/>
+                    
+                    <!-- Молния скорости справа -->
+                    <polygon points="480,220 510,270 450,270" fill="#d4a3e8" opacity="0.8"/>
+                    <polygon points="400,150 430,200 370,200" fill="#d4a3e8" opacity="0.7"/>
+                    
+                    <!-- Текст LECHO -->
+                    <text x="250" y="350" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#fff" stroke="#5a4d6f" stroke-width="2">EAGLE</text>
+                </svg>
+                <h1>EAGLE DELIVERY</h1>
+                <p class="tagline">Быстрая логистика и доставка</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Главная</a></li>
+                <li><a href="catalog/items.html">Каталог</a></li>
+                <li><a href="catalog/services.html">Услуги</a></li>
+                <li><a href="catalog/about.html">О нас</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>Добро пожаловать в Eagle Delivery</h2>
+                <p>Мы предлагаем быструю и надёжную доставку для вашего бизнеса</p>
+                <a href="catalog/items.html" class="btn btn-primary">Перейти в каталог</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="feature-card">
+                    <h3>🚚 Быстрая доставка</h3>
+                    <p>Доставляем в кратчайшие сроки</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✓ Надёжность</h3>
+                    <p>Ваш груз в безопасности</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💰 Доступные цены</h3>
+                    <p>Выгодные условия для всех</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Eagle Delivery. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
